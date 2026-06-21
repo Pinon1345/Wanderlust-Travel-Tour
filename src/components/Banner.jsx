@@ -3,8 +3,8 @@ import { Separator } from "@heroui/react";
 const Banner = () => {
     return (
         <div className="bg-[url('/assets/banner.png')] text-white  flex justify-between flex-col items-center  gap-5 h-150 rounded-t-2xl">
-            <div className="p-10 text-center flex justify-center flex-col items-center gap-3.5 flex-1">
-                <h1 className="text-7xl">
+            <div className="p-10 text-center flex justify-center flex-col items-center gap-6 flex-1">
+                <h1 className="font-semibold text-7xl">
                     Discover Your <br /> Next Adventure
                 </h1>
 
