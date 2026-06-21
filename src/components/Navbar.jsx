@@ -10,9 +10,9 @@ const Navbar = () => {
     const [open, setOpen] = useState(false);
 
     return (
-        <div className='bg-slate-50 rounded-b-3xl shadow-lg shadow-gray-200 sticky top-0 z-50'>
+        <div className='bg-slate-50 rounded-b-3xl shadow-md shadow-gray-400 sticky top-0 z-50'>
 
-            <nav className='mx-6 flex items-center justify-between py-4'>
+            <nav className='mx-6 flex items-center justify-between py-5'>
 
                 {/* LEFT (Desktop) */}
 
