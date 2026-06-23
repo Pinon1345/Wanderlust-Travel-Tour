@@ -41,9 +41,9 @@ const Navbar = () => {
                 <ul className='hidden md:flex items-center gap-4 text-lg font-semibold'>
 
                     <li
-                        className='flex items-center border border-gray-200 font-bold gap-1 px-4 py-1.5 rounded-md text-gray-700 transition-all duration-300 hover:text-blue-600 hover:bg-blue-50 hover:-translate-y-1 hover:shadow-sm active:scale-95'>
+                        className='flex items-center border border-gray-200 font-bold gap-1 px-4 py-1 rounded-md text-gray-700 transition-all duration-300 hover:text-blue-600 hover:bg-blue-50 hover:-translate-y-1 hover:shadow-sm active:scale-95'>
                         <FaRegUser />
-                        <Link href="/profile">Profile</Link>
+                        <Link href="/profile" className='pt-1'>Profile</Link>
                     </li>
 
                     <li className='btn-global'>
@@ -108,7 +108,7 @@ const Navbar = () => {
                         <div
                             className='flex items-center border border-gray-300 mb-1 font-bold gap-1 px-4 py-1 rounded-md text-gray-700 transition-all duration-300 hover:text-blue-600 hover:bg-blue-50 hover:-translate-y-1 hover:shadow-sm active:scale-95'>
                             <FaRegUser />
-                            <Link href="/profile" onClick={() => setOpen(false)}>Profile</Link>
+                            <Link href="/profile" onClick={() => setOpen(false)} className='pt-1'>Profile</Link>
                         </div>
 
                         <Link

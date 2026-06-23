@@ -1,11 +1,14 @@
+import { Button } from '@heroui/react';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import { BiMapPin } from 'react-icons/bi';
 import { CiCircleCheck } from 'react-icons/ci';
+import { MdArrowOutward } from 'react-icons/md';
 import { SlCalender } from 'react-icons/sl';
 
 const DestinationCard = ({ destination }) => {
-    const { imageUrl, country, destinationName, duration, price, category } = destination
+    const { _id, imageUrl, country, destinationName, duration, price, category } = destination
     return (
         <div className="border-2 border-slate-100 rounded-2xl shadow-lg shadow-slate-200 overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl hover:shadow-slate-300 hover:border-cyan-200">
             <div className='mb-2'>
@@ -36,6 +39,18 @@ const DestinationCard = ({ destination }) => {
                     <p>{duration}</p>
                 </div>
             </div>
+
+            {/* Button */}
+
+            <Link href={`/destinations/${_id}`}>
+                <Button
+                    variant='ghost'
+                    className="text-cyan-500 flex items-center gap-1 text-lg font-bold mx-4 mt-2 mb-5 underline underline-offset-4"
+                >
+                    <h2 className='pt-1'>BOOK NOW</h2>
+                    <MdArrowOutward className='w-6 h-6'></MdArrowOutward>
+                </Button>
+            </Link>
 
         </div>
     );
