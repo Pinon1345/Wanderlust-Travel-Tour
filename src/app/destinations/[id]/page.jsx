@@ -1,11 +1,17 @@
+import { EditModal } from '@/components/EditModal';
 import { Button } from '@heroui/react';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import { BiMapPin } from 'react-icons/bi';
 import { CiCircleCheck } from 'react-icons/ci';
 import { FaArrowRight } from 'react-icons/fa';
+import { FaArrowLeftLong } from 'react-icons/fa6';
+import { FiEdit } from 'react-icons/fi';
 import { GiCheckMark } from 'react-icons/gi';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 import { SlCalender } from 'react-icons/sl';
+import { TbFileDescription } from 'react-icons/tb';
 
 const DestinationDetailsPage = async ({ params }) => {
 
@@ -17,11 +23,43 @@ const DestinationDetailsPage = async ({ params }) => {
 
     console.log(destination);
 
-    const { imageUrl, country, destinationName, duration, price, category } = destination;
+    const { imageUrl, country, destinationName, duration, price, category, description } = destination;
 
     return (
         <div className='container w-11/12 mx-auto py-4 mt-4 mb-6'>
+
             <div className='border-2 border-cyan-50 shadow-sm rounded-2xl px-2 py-6'>
+
+                {/* Top Button */}
+
+                <div className='flex justify-between mx-4 pb-5'>
+
+                    <Link
+                        href={"/destinations"}
+                        className='flex items-center gap-2 text-lg font-semibold text-cyan-500'
+                    >
+                        <FaArrowLeftLong></FaArrowLeftLong>
+                        <h2 className='pt-1'>Back to Destinations</h2>
+                    </Link>
+
+                    <div className='flex flex-row items-center gap-4'>
+
+                        <EditModal destination={destination}></EditModal>
+
+                        <Button
+                            variant='outline'
+                            className="text-lg text-red-600 border-red-600 font-semibold hover:bg-red-500 hover:text-white px-6 py-4 rounded-lg"
+                        >
+                            <RiDeleteBin6Line></RiDeleteBin6Line>
+                            <p className='pt-1'>Cancel</p>
+                        </Button>
+
+                    </div>
+
+                </div>
+
+                {/* Details portion */}
+
                 <div>
                     <Image
                         className='w-full h-160 bg-gray-100 object-fill rounded-2xl'
@@ -50,6 +88,11 @@ const DestinationDetailsPage = async ({ params }) => {
                         <div className='flex items-center gap-1 pb-2 text-lg pt-2'>
                             <CiCircleCheck></CiCircleCheck>
                             <p>{category}</p>
+                        </div>
+
+                        <div className='flex items-center font-semibold text-lg gap-1 pb-3 pt-1'>
+                            <TbFileDescription className='text-red-300'></TbFileDescription>
+                            <p className='text-amber-400 pt-1'>{description}</p>
                         </div>
 
                         <div>
