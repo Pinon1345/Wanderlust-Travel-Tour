@@ -1,3 +1,4 @@
+import { DeleteAlert } from '@/components/DeleteAlert';
 import { EditModal } from '@/components/EditModal';
 import { Button } from '@heroui/react';
 import Image from 'next/image';
@@ -46,13 +47,7 @@ const DestinationDetailsPage = async ({ params }) => {
 
                         <EditModal destination={destination}></EditModal>
 
-                        <Button
-                            variant='outline'
-                            className="text-lg text-red-600 border-red-600 font-semibold hover:bg-red-500 hover:text-white px-6 py-4 rounded-lg"
-                        >
-                            <RiDeleteBin6Line></RiDeleteBin6Line>
-                            <p className='pt-1'>Cancel</p>
-                        </Button>
+                        <DeleteAlert></DeleteAlert>
 
                     </div>
 

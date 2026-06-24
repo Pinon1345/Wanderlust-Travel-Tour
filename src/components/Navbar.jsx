@@ -49,7 +49,7 @@ const Navbar = () => {
                     <li className='btn-global'>
                         <Link
                             href="/login">
-                            Login
+                            Sign In
                         </Link>
                     </li>
 
@@ -114,7 +114,7 @@ const Navbar = () => {
                         <Link
                             className='btn-global py-1'
                             href="/login" onClick={() => setOpen(false)}>
-                            Login
+                            Sign In
                         </Link>
 
                         <Link

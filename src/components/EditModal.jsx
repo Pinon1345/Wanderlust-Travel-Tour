@@ -3,29 +3,35 @@
 import { Envelope, PencilToSquare } from "@gravity-ui/icons";
 import { Button, FieldError, Input, Label, ListBox, Modal, Surface, TextField, Select, TextArea } from "@heroui/react";
 import { FiEdit } from "react-icons/fi";
+import { toast } from "react-toastify";
 
 export function EditModal({ destination }) {
 
-    const { description, imageUrl, country, destinationName, duration, price, category, departureDate } = destination
+    const { _id, description, imageUrl, country, destinationName, duration, price, category, departureDate } = destination
 
     const onSubmit = async (e) => {
         e.preventDefault()
         const formData = new FormData(e.currentTarget)
         const destination = Object.fromEntries(formData.entries())
 
-        console.log("Form Information:", destination);
+        // console.log("Form Information:", destination);
 
-        // const res = await fetch('http://localhost:5000/destination', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-type': 'application/json'
-        //     },
-        //     body: JSON.stringify(destination)
-        // })
+
+
+        const res = await fetch(`http://localhost:5000/destination/${_id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(destination)
+        })
 
         const data = await res.json()
-        toast.success("Congratulations! Form Successfully Submitted.")
+        toast.success("Congratulations! Form Successfully Updated.")
         console.log(data);
+
+
+
     }
 
     return (
@@ -178,10 +184,10 @@ export function EditModal({ destination }) {
                                     {/* Buttons */}
 
                                     <Modal.Footer>
-                                        <Button type="submit" slot="close" variant="secondary" className="pt-1">
+                                        <Button slot="close" variant="secondary" className="pt-1">
                                             Cancel
                                         </Button>
-                                        <Button slot="close" className="pt-1">Confirm</Button>
+                                        <Button type="submit" slot="close" className="pt-1">Confirm</Button>
                                     </Modal.Footer>
                                 </form>
 
