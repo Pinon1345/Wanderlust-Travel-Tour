@@ -1,5 +1,7 @@
 'use client';
 
+import { authClient } from '@/lib/auth-client';
+import { Avatar } from '@heroui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
@@ -7,7 +9,18 @@ import { FaRegUser, FaTimes } from 'react-icons/fa';
 import { TiThMenu } from 'react-icons/ti';
 
 const Navbar = () => {
+
     const [open, setOpen] = useState(false);
+
+    const {
+        data: session,
+        isPending, //loading state
+        error, //error object
+        refetch //refetch the session
+    } = authClient.useSession()
+
+    const user = session?.user
+    console.log(user)
 
     return (
         <div className='bg-slate-50 rounded-b-3xl shadow-md shadow-gray-400 sticky top-0 z-50'>
@@ -46,19 +59,41 @@ const Navbar = () => {
                         <Link href="/profile" className='pt-1'>Profile</Link>
                     </li>
 
-                    <li className='btn-global'>
-                        <Link
-                            href="/login">
-                            Sign In
-                        </Link>
-                    </li>
+                    {user
+                        ?
+                        <>
+                            <p className='text-lg pt-1 font-semibold text-purple-400'>Hi! <span className='text-2xl md:text-3xl font-bold text-purple-600'>{user?.name}</span></p>
+                            <p>
+                                <Avatar>
+                                    <Avatar.Image alt={user?.name} src={user?.image} />
+                                    <Avatar.Fallback>{user?.name.charAt(0)}</Avatar.Fallback>
+                                </Avatar>
+                            </p>
+                            <li className='btn-global'>
+                                <Link
+                                    href="/">
+                                    Sign Out
+                                </Link>
+                            </li>
+                        </>
+                        :
+                        <>
+                            <li className='btn-global'>
+                                <Link
+                                    href="/signin">
+                                    Sign In
+                                </Link>
+                            </li>
 
-                    <li className='btn-global'>
-                        <Link
-                            href="/signup">
-                            Sign Up
-                        </Link>
-                    </li>
+                            <li className='btn-global'>
+                                <Link
+                                    href="/signup">
+                                    Sign Up
+                                </Link>
+                            </li>
+                        </>
+                    }
+
                 </ul>
 
                 {/* MOBILE BUTTON */}
@@ -73,7 +108,7 @@ const Navbar = () => {
 
             {/* MOBILE MENU */}
             {open && (
-                <div className='md:hidden flex justify-between items-start px-5 pb-4 space-y-3 font-semibold text-lg mt-2'>
+                <div className='md:hidden flex justify-between items-start px-5 pb-4 space-y-2 font-semibold text-lg mt-2'>
 
                     <div className='flex flex-col items-start gap-3'>
 
@@ -103,25 +138,48 @@ const Navbar = () => {
 
                     </div>
 
-                    <div className='flex flex-col items-end gap-4'>
+                    <div className='flex flex-col items-end gap-3'>
 
                         <div
-                            className='flex items-center border border-gray-300 mb-1 font-bold gap-1 px-4 py-1 rounded-md text-gray-700 transition-all duration-300 hover:text-blue-600 hover:bg-blue-50 hover:-translate-y-1 hover:shadow-sm active:scale-95'>
+                            className='flex items-center border border-gray-300 font-bold gap-1 px-4 py-1 rounded-md text-gray-700 transition-all duration-300 hover:text-blue-600 hover:bg-blue-50 hover:-translate-y-1 hover:shadow-sm active:scale-95'>
                             <FaRegUser />
                             <Link href="/profile" onClick={() => setOpen(false)} className='pt-1'>Profile</Link>
                         </div>
 
-                        <Link
-                            className='btn-global py-1'
-                            href="/login" onClick={() => setOpen(false)}>
-                            Sign In
-                        </Link>
+                        {user
+                            ?
+                            <>
+                                <p className='text-lg pt-1 font-semibold text-purple-400'>Hi! <span className='text-2xl md:text-3xl font-bold text-purple-600'>{user?.name}</span></p>
+                                <p>
+                                    <Avatar>
+                                        <Avatar.Image alt={user?.name} src={user?.image} />
+                                        <Avatar.Fallback>{user?.name.charAt(0)}</Avatar.Fallback>
+                                    </Avatar>
+                                </p>
+                                <li className='btn-global'>
+                                    <Link
+                                        href="/">
+                                        Sign Out
+                                    </Link>
+                                </li>
+                            </>
+                            :
+                            <>
+                                <li className='btn-global'>
+                                    <Link
+                                        href="/signin">
+                                        Sign In
+                                    </Link>
+                                </li>
 
-                        <Link
-                            className='btn-global'
-                            href="/signup" onClick={() => setOpen(false)}>
-                            Sign Up
-                        </Link>
+                                <li className='btn-global'>
+                                    <Link
+                                        href="/signup">
+                                        Sign Up
+                                    </Link>
+                                </li>
+                            </>
+                        }
 
                     </div>
                 </div>
