@@ -47,7 +47,7 @@ const DestinationDetailsPage = async ({ params }) => {
 
                         <EditModal destination={destination}></EditModal>
 
-                        <DeleteAlert></DeleteAlert>
+                        <DeleteAlert destination={destination}></DeleteAlert>
 
                     </div>
 

@@ -1,9 +1,27 @@
 "use client";
 
 import { AlertDialog, Button } from "@heroui/react";
+import { redirect } from "next/navigation";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
-export function DeleteAlert() {
+export function DeleteAlert({ destination }) {
+    const { _id, destinationName } = destination
+
+    const handleDelete = async () => {
+        const res = await fetch(`http://localhost:5000/destination/${_id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-type': "application/json"
+            }
+
+        })
+
+        const data = await res.json()
+        redirect("/destinations")
+        console.log(data)
+    }
+
+
     return (
         <AlertDialog>
 
@@ -25,7 +43,7 @@ export function DeleteAlert() {
                         </AlertDialog.Header>
                         <AlertDialog.Body>
                             <p>
-                                This will permanently delete <strong>My Awesome Project</strong> and all of its
+                                This will permanently delete <strong>{destinationName}</strong> and all of its
                                 data. This action cannot be undone.
                             </p>
                         </AlertDialog.Body>
@@ -33,7 +51,7 @@ export function DeleteAlert() {
                             <Button slot="close" variant="tertiary" className="pt-1">
                                 Cancel
                             </Button>
-                            <Button slot="close" variant="danger" className="pt-1">
+                            <Button onClick={handleDelete} slot="close" variant="danger" className="pt-1">
                                 Delete Destination
                             </Button>
                         </AlertDialog.Footer>
