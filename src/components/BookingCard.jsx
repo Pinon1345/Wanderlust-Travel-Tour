@@ -3,6 +3,7 @@
 import { authClient } from '@/lib/auth-client';
 import { Button, DateField, Label } from '@heroui/react';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import { FaArrowRight } from 'react-icons/fa';
 import { GiCheckMark } from 'react-icons/gi';
 import { SlCalender } from 'react-icons/sl';
@@ -11,9 +12,9 @@ const BookingCard = ({ destination }) => {
 
     const {
         data: session,
-    } = authClient.useSession()
+    } = authClient.useSession();
 
-    const user = session?.user
+    const user = session?.user;
     console.log(user)
 
     const [departureDate, setDepartureDate] = useState(null)
@@ -25,17 +26,29 @@ const BookingCard = ({ destination }) => {
 
     const handleBooking = async () => {
         const bookingData = {
-            userId: user.id,
-            userImage: user.image,
-            userName: user.name,
+            userId: user?.id,
+            userImage: user?.image,
+            userName: user?.name,
             destinationId: _id,
             destinationName,
-            destinationImage: imageUrl,
+            imageUrl,
             price,
             country,
             departureDate: new Date(departureDate),
         }
-        console.log(bookingData);
+
+        const res = await fetch("http://localhost:5000/booking", {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(bookingData)
+        })
+
+        const data = await res.json()
+
+        toast.success("Thank for booked a new destination.")
+
     }
 
     return (
