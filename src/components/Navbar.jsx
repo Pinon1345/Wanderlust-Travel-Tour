@@ -22,6 +22,10 @@ const Navbar = () => {
     const user = session?.user
     console.log(user)
 
+    const handleSignOut = async () => {
+        await authClient.signOut();
+    }
+
     return (
         <div className='bg-slate-50 rounded-b-3xl shadow-md shadow-gray-400 sticky top-0 z-50'>
 
@@ -56,7 +60,7 @@ const Navbar = () => {
                     <li
                         className='flex items-center border border-gray-200 font-bold gap-1 px-4 py-1 rounded-md text-gray-700 transition-all duration-300 hover:text-blue-600 hover:bg-blue-50 hover:-translate-y-1 hover:shadow-sm active:scale-95'>
                         <FaRegUser />
-                        <Link href="/profile" className='pt-1'>Profile</Link>
+                        <Link href="/profile" className='pt-1 block'>Profile</Link>
                     </li>
 
                     {user
@@ -65,12 +69,14 @@ const Navbar = () => {
                             <p className='text-lg pt-1 font-semibold text-purple-400'>Hi! <span className='text-2xl md:text-3xl font-bold text-purple-600'>{user?.name}</span></p>
                             <p>
                                 <Avatar>
-                                    <Avatar.Image alt={user?.name} src={user?.image} />
+                                    <Avatar.Image referrerPolicy='no-referrer' alt={user?.name} src={user?.image} />
                                     <Avatar.Fallback>{user?.name.charAt(0)}</Avatar.Fallback>
                                 </Avatar>
                             </p>
                             <li className='btn-global'>
                                 <Link
+                                    className='block'
+                                    onClick={handleSignOut}
                                     href="/">
                                     Sign Out
                                 </Link>
@@ -80,6 +86,7 @@ const Navbar = () => {
                         <>
                             <li className='btn-global'>
                                 <Link
+                                    className='block'
                                     href="/signin">
                                     Sign In
                                 </Link>
@@ -87,6 +94,7 @@ const Navbar = () => {
 
                             <li className='btn-global'>
                                 <Link
+                                    className='block'
                                     href="/signup">
                                     Sign Up
                                 </Link>
@@ -143,7 +151,7 @@ const Navbar = () => {
                         <div
                             className='flex items-center border border-gray-300 font-bold gap-1 px-4 py-1 rounded-md text-gray-700 transition-all duration-300 hover:text-blue-600 hover:bg-blue-50 hover:-translate-y-1 hover:shadow-sm active:scale-95'>
                             <FaRegUser />
-                            <Link href="/profile" onClick={() => setOpen(false)} className='pt-1'>Profile</Link>
+                            <Link href="/profile" onClick={() => setOpen(false)} className='pt-1 block'>Profile</Link>
                         </div>
 
                         {user
@@ -152,12 +160,14 @@ const Navbar = () => {
                                 <p className='text-lg pt-1 font-semibold text-purple-400'>Hi! <span className='text-2xl md:text-3xl font-bold text-purple-600'>{user?.name}</span></p>
                                 <p>
                                     <Avatar>
-                                        <Avatar.Image alt={user?.name} src={user?.image} />
+                                        <Avatar.Image referrerPolicy='no-referrer' alt={user?.name} src={user?.image} />
                                         <Avatar.Fallback>{user?.name.charAt(0)}</Avatar.Fallback>
                                     </Avatar>
                                 </p>
                                 <li className='btn-global'>
                                     <Link
+                                        className='block'
+                                        onClick={handleSignOut}
                                         href="/">
                                         Sign Out
                                     </Link>
@@ -167,6 +177,7 @@ const Navbar = () => {
                             <>
                                 <li className='btn-global'>
                                     <Link
+                                        className='block'
                                         href="/signin">
                                         Sign In
                                     </Link>
@@ -174,6 +185,7 @@ const Navbar = () => {
 
                                 <li className='btn-global'>
                                     <Link
+                                        className='block'
                                         href="/signup">
                                         Sign Up
                                     </Link>

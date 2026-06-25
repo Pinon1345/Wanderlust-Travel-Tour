@@ -2,8 +2,10 @@
 
 import { authClient } from '@/lib/auth-client';
 import { Button, Card, Description, FieldError, Form, Input, Label, TextField } from '@heroui/react';
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import React from 'react';
+import { FcGoogle } from 'react-icons/fc';
 import { toast } from 'react-toastify';
 
 const SignUpPage = () => {
@@ -26,12 +28,19 @@ const SignUpPage = () => {
         console.log({ data, error });
 
         if (data) {
+            toast.success("Congratulations! Successfully Sign Up an Account.")
             redirect("/")
         }
 
         if (error) {
             toast.error("Ahh! Sign Up Failed. Please try again later.")
         }
+    }
+
+    const handleGoogleSignIn = async () => {
+        await authClient.signIn.social({
+            provider: "google"
+        })
     }
 
     return (
@@ -121,13 +130,35 @@ const SignUpPage = () => {
                         {/* Form Button */}
 
 
-                        <div className="flex gap-2 mt-2 mb-4">
+                        <div className="flex gap-2 mt-2">
                             <Button type="submit" className="bg-[#15A1BF] w-full rounded-md text-lg font-bold pt-1">
                                 Create Account
                             </Button>
 
                         </div>
                     </Form>
+
+                    {/* Sign Up with Google */}
+
+                    <div className='px-4'>
+
+                        <div className="flex items-center my-4">
+                            <div className="flex-1 border-t border-gray-300"></div>
+                            <span className="px-4 text-gray-500 text-sm">OR</span>
+                            <div className="flex-1 border-t border-gray-300"></div>
+                        </div>
+
+                        <Button onClick={handleGoogleSignIn} variant='btn-outline' size='lg' className="w-full border rounded-lg py-2 flex items-center justify-center gap-2 mb-2">
+                            {/* <img src="/google.svg" alt="Google" className="w-5 h-5" /> */}
+                            <FcGoogle className='w-6 h-6'></FcGoogle>
+                            <h1 className='text-lg font-bold pt-1'>Sign Up With Google</h1>
+                        </Button>
+
+                        <h2 className='text-center text-lg pb-6 pt-2'>Already have an account? <span className='font-bold text-xl text-blue-600'><Link href={"/signin"}>Sign In</Link></span></h2>
+
+                    </div>
+
+
                 </Card>
 
             </div>
