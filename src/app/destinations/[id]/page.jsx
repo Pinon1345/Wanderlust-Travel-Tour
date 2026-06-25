@@ -1,3 +1,4 @@
+import BookingCard from '@/components/BookingCard';
 import { DeleteAlert } from '@/components/DeleteAlert';
 import { EditModal } from '@/components/EditModal';
 import { Button } from '@heroui/react';
@@ -24,7 +25,7 @@ const DestinationDetailsPage = async ({ params }) => {
 
     console.log(destination);
 
-    const { imageUrl, country, destinationName, duration, price, category, description } = destination;
+    const { imageUrl, country, destinationName, category, description } = destination;
 
     return (
         <div className='container w-11/12 mx-auto py-4 mt-4 mb-6'>
@@ -123,44 +124,8 @@ const DestinationDetailsPage = async ({ params }) => {
                     </div>
 
                     {/* right side */}
-                    <div className='flex-1 bg-base-100 border-2 border-slate-100 shadow-lg shadow-gray-200 p-6 rounded-md mb-4 mt-2'>
 
-                        <p className='font-semibold py-2'>Starting from</p>
-
-                        <h2 className='text-slate-900/60 pb-2 font-bold text-2xl'>${price}<span className='font-semibold text-lg text-gray-400'>/Person</span></h2>
-
-                        <div className='bg-slate-100 rounded-xl shadow-md p-4 mt-2 mb-6 shadow-gray-50'>
-
-                            <div className='flex items-center gap-2'>
-                                <SlCalender></SlCalender>
-                                <p className='text-lg font-semibold pt-1'>{duration}</p>
-                            </div>
-
-                        </div>
-
-                        {/* Button */}
-
-                        <Button className="flex flex-row items-center mt-4 mb-6 gap-2 bg-cyan-700 text-white rounded-lg px-4 py-6 w-full">
-                            <p className='text-lg font-bold pt-1'>Book Now</p>
-                            <FaArrowRight></FaArrowRight>
-                        </Button>
-
-                        <div className='mt-2 mb-4'>
-                            <div className='flex items-center gap-2'>
-                                <GiCheckMark className='text-green-400'></GiCheckMark>
-                                <p className='text-gray-500'>Free cancellation up to 7 days</p>
-                            </div>
-                            <div className='flex items-center gap-2'>
-                                <GiCheckMark className='text-green-400'></GiCheckMark>
-                                <p className='text-gray-500'>Travel insurance included</p>
-                            </div>
-                            <div className='flex items-center gap-2'>
-                                <GiCheckMark className='text-green-400'></GiCheckMark>
-                                <p className='text-gray-500'>24/7 customer support</p>
-                            </div>
-                        </div>
-
-                    </div>
+                    <BookingCard destination={destination}></BookingCard>
 
                 </div>
             </div>
