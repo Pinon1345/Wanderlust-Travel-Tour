@@ -15,13 +15,23 @@ import { IoChevronBackOutline } from 'react-icons/io5';
 
 const MyBookingsPage = async () => {
 
+    // JWT secure in this server component
+
     const session = await auth.api.getSession({
+        headers: await headers()
+    })
+
+    const { token } = await auth.api.getToken({
         headers: await headers()
     })
 
     const user = session?.user
 
-    const res = await fetch(`http://localhost:5000/booking/${user?.id}`)
+    const res = await fetch(`http://localhost:5000/booking/${user?.id}`, {
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    })
 
     const bookings = await res.json()
     console.log(bookings)
@@ -53,7 +63,7 @@ const MyBookingsPage = async () => {
                                         className="flex items-center gap-2 font-semibold pt-1 text-lg"
                                     >
                                         <IoChevronBackOutline></IoChevronBackOutline>
-                                        <h2>Explore Destinations</h2>
+                                        <h2 className='pt-0.5'>Explore Destinations</h2>
                                     </Button>
                                 </Link>
                             </div>

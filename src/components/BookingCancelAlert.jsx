@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { AlertDialog, Button } from "@heroui/react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
@@ -8,10 +9,16 @@ export function BookingCancelAlert({ booking }) {
     const { destinationName, _id } = booking
 
     const handleCancelBooking = async () => {
+
+        // JWT Security in this Client component
+
+        const { data: tokenData } = await authClient.token()
+
         const res = await fetch(`http://localhost:5000/booking/${_id}`, {
             method: 'DELETE',
             headers: {
-                'Content-type': 'application/json'
+                'Content-type': 'application/json',
+                authorization: `Bearer ${tokenData?.token}`
             }
         })
         const data = await res.json()
