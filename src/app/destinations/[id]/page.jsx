@@ -27,7 +27,7 @@ const DestinationDetailsPage = async ({ params }) => {
     })
 
 
-    const res = await fetch(`http://localhost:5000/destination/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/destination/${id}`, {
         headers: {
             authorization: `Bearer ${token}`
         }
@@ -46,7 +46,7 @@ const DestinationDetailsPage = async ({ params }) => {
 
                 {/* Top Button */}
 
-                <div className='flex justify-between mx-4 pb-5'>
+                <div className='flex flex-col md:flex-row items-center justify-between gap-4 mx-4 pb-5'>
 
                     <Link
                         href={"/destinations"}

@@ -14,7 +14,7 @@ export function BookingCancelAlert({ booking }) {
 
         const { data: tokenData } = await authClient.token()
 
-        const res = await fetch(`http://localhost:5000/booking/${_id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/booking/${_id}`, {
             method: 'DELETE',
             headers: {
                 'Content-type': 'application/json',
