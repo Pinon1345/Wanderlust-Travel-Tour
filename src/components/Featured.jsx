@@ -11,9 +11,9 @@ const FeaturedPage = async () => {
     console.log(destinations)
 
     return (
-        <div className='container w-11/12 mx-auto py-4 mt-6 mb-6'>
+        <div className='container w-11/12 mx-auto mt-8 mb-8'>
 
-            <div className='flex flex-col md:flex-row justify-between items-center gap-4 mt-4 mb-8'>
+            <div className='flex flex-col md:flex-row justify-between items-center gap-4 mt-8 mb-8'>
                 <div>
                     <h2 className='text-2xl md:text-4xl font-bold text-blue-700'>Featured Destinations</h2>
                     <p className='text-lg text-gray-400'>Handpicked travel experiences for the adventure seekers</p>
